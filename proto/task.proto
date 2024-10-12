@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package task;
+
+
+option go_package = "/proto";
+
+service TaskService {
+  rpc CreateTask (TaskRequest) returns (TaskResponse);
+  rpc GetTaskStatus (TaskStatusRequest) returns (TaskStatusResponse);
+  rpc RequestTask (Empty) returns (stream Task);
+}
+
+message TaskRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message TaskResponse {
+  string id = 1;
+  string status = 2;
+}
+
+message TaskStatusRequest {
+  string id = 1;
+}
+
+message TaskStatusResponse {
+  string status = 1;
+}
+
+message Task {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message Empty {}
